@@ -47,13 +47,14 @@ helm repo update
 helm show values ingress-nginx/ingress-nginx
 
 # Use Helm to deploy an NGINX ingress controller
-helm install ingress-nginx ingress-nginx/ingress-nginx \
-    --namespace ingress-basic \
-    --set controller.replicaCount=2 \
-    --set controller.nodeSelector."kubernetes\.io/os"=linux \
-    --set defaultBackend.nodeSelector."kubernetes\.io/os"=linux \
-    --set controller.service.externalTrafficPolicy=Local \
-    --set controller.service.loadBalancerIP="REPLACE_STATIC_IP" 
+helm install ingress-nginx ingress-nginx/ingress-nginx `
+  --namespace ingress-basic `
+  --set controller.replicaCount=2 `
+  --set "controller.nodeSelector.kubernetes\.io/os=linux" `
+  --set "defaultBackend.nodeSelector.kubernetes\.io/os=linux" `
+  --set controller.service.externalTrafficPolicy=Local `
+  --set controller.service.loadBalancerIP="4.221.59.75"
+
 
 # Replace Static IP captured in Step-02 (without beta for NodeSelectors)
 helm install ingress-nginx ingress-nginx/ingress-nginx \
